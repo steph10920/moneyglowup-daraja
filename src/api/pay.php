@@ -1,7 +1,16 @@
 <?php
 require_once '../config/mpesa.php';
 require_once '../utils/response.php';
+header("Access-Control-Allow-Origin: https://moneyglowup-by-brenda.vercel.app"); // Replace with your frontend domain
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Access-Control-Allow-Credentials: true");
 
+// Handle preflight requests (OPTIONS method)
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
 // Check for POST request
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     sendResponse(405, "Method Not Allowed");
